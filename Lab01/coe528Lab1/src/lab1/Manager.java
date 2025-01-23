@@ -124,6 +124,108 @@ public class Manager {
         System.out.println("Welcome to the flight management system.");
         Scanner userIn = new Scanner(System.in);
         String scanString;
+        
+        while (true){
+            System.out.println("Type 1 to add flight");
+            System.out.println("Type 2 to see availble flights");
+            System.out.println("Type 3 to see flight info with flight number");
+            System.out.println("Type 4 to book a flight");
+            System.out.println("Type 5 to exit");
+            System.out.println("Input: ");
+            scanString = userIn.nextLine();
+            
+            switch(scanString){
+                case "1":
+                    M.createFlights();
+                    break;
+                case "2":
+                    String origin, destination;
+                    System.out.println("Origin: ");
+                    origin = userIn.nextLine();
+                    System.out.println("Destination: ");
+                    destination = userIn.nextLine();
+                    M.displayAvailableFlights(origin, destination);
+                    break;
+                case "3":
+                    int flightNumber;
+                    System.out.println("Flight number: ");
+                    scanString = userIn.nextLine();
+                    
+                    try {
+                        flightNumber = Integer.parseInt(scanString);
+                        if (M.getFlight(flightNumber) == null) {
+                            System.out.println("Flight does not exist");
+                        } else {
+                            System.out.println(M.getFlight(flightNumber));
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please input an integer value");
+                    }
+                    break;
+                case "4":
+                    int age, yearsMember;
+                    flightNumber = 0;
+                    String name;
+                    Passenger p = null;
+                    System.out.println("Passengers name: ");
+                    name = userIn.nextLine();
+                    System.out.println("Passengers age: ");
+                    scanString = userIn.nextLine();
+                    try {
+                        age = Integer.parseInt(scanString);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please input an integer value");
+                        break;
+                    }
+                    System.out.println("Is the passenger a member (yes/no):");
+                    scanString = userIn.nextLine();
+                    
+                    if (scanString.equals("yes")) {
+                        System.out.println("Number of years they've been a member: ");
+                        scanString = userIn.nextLine();
+                        try {
+                            yearsMember = Integer.parseInt(scanString);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Please input an integer value");
+                            break;
+                        }
+                        p = new Member(name, age, yearsMember);
+                    } else if (scanString.equals("no")) {
+                        p = new NonMember(name, age);
+                    } else {
+                        System.out.println("Please input yes or no");
+                    }
+                    
+                    System.out.println("Flight number: ");
+                    scanString = userIn.nextLine();
+                    try {
+                        if (M.getFlight(Integer.parseInt(scanString)) == null) {
+                            System.out.println("Flight does not exist");
+                            break;
+                        } else {
+                            flightNumber = Integer.parseInt(scanString);
+                        }
+                        M.bookSeat(flightNumber, p);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please input an integer value");
+                        break;
+                    }
+                    break;
+                case "5":
+                    break;
+                
+                default:
+                    System.out.println("Please enter 1-5. ");
+            }
+        }
+
+        
+        
+            
+        
+        /*
+        Scanner userIn = new Scanner(System.in);
+        String scanString;
         OUTER:
         while (true) {
             System.out.println("Type 'flight' to add a flight");
@@ -216,5 +318,6 @@ public class Manager {
                     break;
             }
         }
+*/
     }
 }
