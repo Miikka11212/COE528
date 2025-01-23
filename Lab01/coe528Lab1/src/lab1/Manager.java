@@ -212,7 +212,8 @@ public class Manager {
                     }
                     break;
                 case "5":
-                    break;
+                    System.out.println("exiting...");
+                    System.exit(0);
                 
                 default:
                     System.out.println("Please enter 1-5. ");
