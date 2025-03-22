@@ -9,7 +9,7 @@ package lab4;
  * @author Oscar Wang
  */
 public class Driver {
-    public static void main(String[] args) {
+    public static void main(){
         FoodComponent fi1 = new FoodItem("blueberries", 2.5);
         FoodComponent fi2 = new FoodItem("strawberries", 3.5);
         FoodComponent fi3 = new FoodItem("egg", 4.5);
@@ -30,4 +30,3 @@ public class Driver {
         fc1.print(0);
     }
 }
-
